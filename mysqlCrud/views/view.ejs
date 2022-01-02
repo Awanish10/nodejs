@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div align="center">
+        <h1>View</h1>
+        </div>
+  
+      <table border="1"widh="100%"align="center" >
+          <tr>
+              <td>No</td>
+              <td>Name</td>
+              <td>Email</td>
+              <td>Mobile</td>
+              <td>Update</td>
+              <td>Delete</td>
+             
+          </tr>
+          <% j = 1;
+          for(var i=0; i < viewData.length; i++) { %>
+            <tr>
+            <td><%= j%>.</td>
+            <td><%= viewData[i].name %></td>
+            <td><%= viewData[i].email %></td>
+            <td><%= viewData[i].mobile %></td>
+            <td><a href="/update/<%= viewData[i].id %>">update</a></td>
+            <td><a href="/delete/<%= viewData[i].id %>" onclick="return confirm('Are you sure delete')">delete</a></td>
+           </tr>
+           <% 
+           j ++;
+          } %>
+
+      </table>
+      <div align="center">
+          <a href="/add">add</a>
+      </div>
+  </body>
+</html>
