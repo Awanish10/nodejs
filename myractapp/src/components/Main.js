@@ -1,5 +1,6 @@
 
 import React,{useState,useEffect} from 'react';
+import { Link } from "react-router-dom";
 const Main = () => {
    const [myuser,setUser] = useState([]);
   const getAllData = async () => {
@@ -37,8 +38,10 @@ const Main = () => {
   }
 
 </table>
-
-  </div>;
+<div align="center">
+<Link to="/add">Add Form</Link>
+</div>
+  </div>
 };
 
 export default Main;
