@@ -39,7 +39,8 @@ const Main = () => {
 
 </table>
 <div align="center">
-<Link to="/add">Add Form</Link>
+<Link to="/add">Add Form</Link>|||
+<Link to="/update">update</Link>
 </div>
   </div>
 };

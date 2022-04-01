@@ -1,41 +1,83 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 function Add() {
   const [formdata, setformdata] = useState({
     name:'',
     email:'',
-    addr :'',
-    mobi:''
+    mobile :'',
+    address:''
 
   });
-  console.log(formdata);
+  //console.log(formdata);
  const hendlInput = (e)=>{
 const name = e.target.name;
 const value = e.target.value;
 //console.log(name,value);
 setformdata({...formdata,[name] : value})
   }
+ let navigate = useNavigate();
+  function handleSubmit(event)
+  {
+    //console.log(formdata);
+    //navigate('/');
+  // const getalldata = async ()=>{
+  //    const response = await fetch('http://localhost:8000/students', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formdata)
+  //   })
+  //  // console.log(response);
+  //  }
+  //   console.log(getalldata());
+
+  var xhr = new XMLHttpRequest();
+xhr.open("POST", 'http://localhost:8000/students', true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onreadystatechange = function() { 
+  if (xhr.readyState == 4 && xhr.status == 200)
+  var validData = JSON.parse(xhr.responseText);
+  if(validData.keyPattern.email==1){
+    alert("Please enter other email");
+    return false;
+  }
+  if(validData.keyPattern.mobile==1){
+    alert("Please enter other mobile");
+    return false;
+  }
+
+}
+xhr.send(JSON.stringify(formdata));
+ 
+    event.preventDefault();
+    navigate('/');
+   
+    
+
+  }
   return (
-    <div>hendlInput
+    <div>
       <div align="center" width='60%'>
-      <form action="" method="post">
+      <form onSubmit={handleSubmit}>
       <table align='center'>
         <tr>
           <td>Name : </td>
-          <td><input type="text" name="name" onChange={hendlInput} value={formdata.name}/></td>
+          <td><input type="text" name="name" onChange={hendlInput } value={formdata.name}/></td>
         </tr>
         <tr>
           <td>Email :</td>
-          <td><input type="text" name="email" onChange={hendlInput} value={formdata.email}/></td>
+          <td><input type="email" name="email" onChange={hendlInput} value={formdata.email}/></td>
         </tr>
         <tr>
           <td>Address :</td>
-          <td><input type="text" name="addr" onChange={hendlInput} value={formdata.addr}/></td>
+          <td><input type="text" name="address" onChange={hendlInput} value={formdata.addr}/></td>
         </tr>
         <tr>
           <td>Mobile :</td>
-          <td><input type="text" name='mobi' onChange={hendlInput} value={formdata.mobi}/></td>
+          <td><input type="text" name='mobile' onChange={hendlInput} value={formdata.mobi} maxLength={10}/></td>
         </tr>
         <tr>
           <td></td>
@@ -46,7 +88,8 @@ setformdata({...formdata,[name] : value})
       </form>
       </div>
 <div align="center">
-        <Link to="/">Home</Link>
+        <Link to="/">Home</Link> |||||
+        <Link to="/update">update</Link>
       </div>
     </div>
     
